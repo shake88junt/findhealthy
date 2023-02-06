@@ -1474,7 +1474,7 @@ const Bottombar = ({
             className="align-center justify-center blue-btn-one box-shadow-2 mar-bottom-32"
           >
             <h3 className="mar-right-8">Create</h3>
-            <FontAwesomeIcon icon={faLocationDot} className="blue icon-med" />
+            <FontAwesomeIcon icon={faLocationDot} className="white icon-med" />
           </button>
         </form>
       )}
