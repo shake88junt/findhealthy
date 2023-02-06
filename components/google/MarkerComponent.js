@@ -9,6 +9,9 @@ import COLORS from "../../data/colors";
 const Cont = styled.div`
   max-width: 320px;
   .tags-holder {
+    border-bottom: 1px solid ${(props) => props.colors.grey};
+  
+    
     display: flex;
     justify-content: center;
     //background-color: ${(props) => props.colors.grey};
@@ -19,6 +22,7 @@ const Cont = styled.div`
   }
   .field-line {
     margin-bottom: 8px;
+    word-break:break-word;
   }
 `;
 const MarkerComponent = ({
@@ -57,7 +61,7 @@ const MarkerComponent = ({
       {open && (
         <InfoWindow onCloseClick={() => setOpen(false)}>
           <Cont colors={COLORS} className="info-box">
-            <div className="tags-holder grey-gradient-bg">
+            <div className="tags-holder ">
               <p style={{ backgroundColor: "#CCE729" }} className="tag-four">
                 {tags[0]}
               </p>
@@ -84,43 +88,44 @@ const MarkerComponent = ({
             >
               <div className="blue-btn-one flex justify-center align-center mar-bottom-16">
                 <h5 className="mar-right-8">VIEW</h5>
-                <FontAwesomeIcon icon={faEye} className="icon-sm blue" />
+                <FontAwesomeIcon icon={faEye} className="icon-sm white" />
               </div>
             </Link>
             <div className="field-line">
-              <h5>Name</h5>
-              <div className="red-line mar-bottom-4"></div>
-              <p className="bold">{name}</p>
+              <p className = 'black bold'>Name</p>
+              <div className="grey-line mar-bottom-4"></div>
+              <h5 className="bold black">{name}</h5>
             </div>
 
             <div className="field-line">
-              <h5>Address</h5>
-              <div className="red-line mar-bottom-4"></div>
-              <p className="bold">{address}</p>
+              <p className = 'black bold'>Address</p>
+              <div className="grey-line mar-bottom-4"></div>
+              <h5 className="bold black">{address}</h5>
             </div>
             {website != null && (
               <div className="field-line">
-                <h5>Website</h5>
-                <div className="red-line mar-bottom-4"></div>
+                <p className = 'black bold'>Website</p>
+                <div className="grey-line mar-bottom-4"></div>
                 <a href={website}>
-                  <p className="bold ">{website}</p>
+                  <p className="bold">{website}</p>
                 </a>
               </div>
             )}
 
             <div className="field-line">
-              <h5>Description</h5>
+              <p className = 'black bold'>Description</p>
               <p className="info-box-description">{description}</p>
             </div>
 
             <div className="field-line">
-              <h5>Products</h5>
-              <div className="red-line mar-bottom-4"></div>
-              <ul>
+              <p className = 'bold'>Products</p>
+              <div className="grey-line mar-bottom-4"></div>
+              <ul className = 'products-holder'>
                 {products.map((product, index) => {
                   return (
                     <li key={index} className="product mar-bottom-4">
                       <h5 className="black">{product.name}</h5>
+                      <div className="spacer-line"></div>
                       <div className="price">
                         <p>
                           ${product.price}/{product.measurement}
@@ -137,8 +142,8 @@ const MarkerComponent = ({
                   style={{ borderRight: "1px solid black" }}
                   className="mar-right-8 pad-right-8 flex-one"
                 >
-                  <h5 className="bold">Email:</h5>
-                  <div className="red-line mar-bottom-4"></div>
+                  <p className="bold">Email:</p>
+                  <div className="grey-line mar-bottom-4"></div>
                   <a href={`mailto:${email}`}>
                     <p className="bold">{email}</p>{" "}
                   </a>
@@ -146,8 +151,8 @@ const MarkerComponent = ({
               )}
               {number != null && (
                 <div className="flex-one">
-                  <h5>Phone:</h5>
-                  <div className="red-line mar-bottom-4"></div>
+                  <p className = 'bold'>Phone:</p>
+                  <div className="grey-line mar-bottom-4"></div>
                   <a href={`tel:${number}`}>
                     <p className="bold">{number}</p>
                   </a>
@@ -155,13 +160,13 @@ const MarkerComponent = ({
               )}
             </div>
             <div className="field-line">
-              <h5>Pickup or delivery?</h5>
-              <div className="red-line mar-bottom-04"></div>
-              <p className="bold">{pickup}</p>
+              <p className = 'bold'>Pickup or delivery?</p>
+              <div className="grey-line mar-bottom-4"></div>
+              <h5 className="bold black">{pickup}</h5>
             </div>
 
-            <h5>Hours</h5>
-            <div className="red-line mar-bottom-4"></div>
+            <p className = 'bold' >Hours</p>
+            <div className="grey-line mar-bottom-4"></div>
             <div className="flex">
               <div
                 style={{ borderRight: "1px solid black" }}
@@ -206,7 +211,7 @@ const MarkerComponent = ({
             >
               <div className="blue-btn-one flex justify-center align-center mar-bottom-16">
                 <h5 className="mar-right-8">VIEW</h5>
-                <FontAwesomeIcon icon={faEye} className="icon-sm blue" />
+                <FontAwesomeIcon icon={faEye} className="icon-sm white" />
               </div>
             </Link>
           </Cont>

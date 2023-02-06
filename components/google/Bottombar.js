@@ -3,6 +3,7 @@ import styled from "styled-components";
 import COLORS from "../../data/colors";
 import PhotoDisplay from "../popups/PhotoDisplay";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { nanoid } from "nanoid";
 import {
   faClose,
   faPlus,
@@ -10,6 +11,7 @@ import {
   faDollarSign,
   faCoins,
   faEgg,
+  faUpload,
   faFaceSmileBeam,
   faSmileBeam,
   faWeightScale,
@@ -58,13 +60,9 @@ const Cont = styled.div`
     padding: 8px;
   }
   .optional-fields {
-    border: 2px solid ${(props) => props.colors.darkPink};
-    .title-spec {
-      padding: 32px;
-      margin-bottom: 32px;
-      text-align: center;
-      border-bottom: 1px solid ${(props) => props.colors.darkPink};
-    }
+    background: #fff;
+    border: 1px solid ${(props) => props.colors.grey};
+    padding: 16px;
   }
 
   .dollar-input {
@@ -85,10 +83,8 @@ const Cont = styled.div`
     margin-bottom: 32px;
   }
   .stars {
-    padding-top: 32px;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    
+    
   }
 `;
 
@@ -373,13 +369,13 @@ const Bottombar = ({
         formData.email,
         numberOrganize.join(""),
         selectedTags,
-        formData.grassFed,
-        formData.organic,
-        formData.vaccineFree,
-        formData.pastureRaised,
-        formData.soyFree,
-        formData.dewormerFree,
-        formData.unfrozen,
+        optionalFields.grassFed.value,
+        optionalFields.organic.value,
+        optionalFields.vaccineFree.value,
+        optionalFields.pastureRaised.value,
+        optionalFields.soyFree.value,
+        optionalFields.dewormerFree.value,
+        optionalFields.unfrozens.value,
         reviewFields.pricing.stars === 0 ? null : reviewFields.pricing.stars,
         reviewFields.quality.stars === 0 ? null : reviewFields.quality.stars,
         reviewFields.friendly.stars === 0 ? null : reviewFields.friendly.stars,
@@ -398,13 +394,13 @@ const Bottombar = ({
         formData.email,
         numberOrganize.join(""),
         selectedTags,
-        formData.grassFed,
-        formData.organic,
-        formData.vaccineFree,
-        formData.pastureRaised,
-        formData.soyFree,
-        formData.dewormerFree,
-        formData.unfrozen,
+        optionalFields.grassFed.value,
+        optionalFields.organic.value,
+        optionalFields.vaccineFree.value,
+        optionalFields.pastureRaised.value,
+        optionalFields.soyFree.value,
+        optionalFields.dewormerFree.value,
+        optionalFields.unfrozens.value,
         reviewFields.pricing.stars === 0 ? null : reviewFields.pricing.stars,
         reviewFields.quality.stars === 0 ? null : reviewFields.quality.stars,
         reviewFields.friendly.stars === 0 ? null : reviewFields.friendly.stars,
@@ -647,8 +643,71 @@ const Bottombar = ({
     setShowPhotoDisplay(false);
   };
 
-  const checkShowHours = () => {};
+  const [optionalFields, setOptionalFields] = useState({
+    grassFed:{name:'Grass Fed', value:'unspecified'},
+    organic:{name:'Organic', value:'unspecified'},
+    vaccineFree:{name:'Vaccine Free', value:'unspecified'},
+    pastureRaised:{name:'Pasture Raised', value:'unspecified'},
+    soyFree:{name:'Soy Free', value:'unspecified'},
+    dewormerFree:{name:'Dewormer Free', value:'unspecified'},
+    unfrozen:{name:'Unfrozen', value:'unspecified'},
+  });
 
+  const updateFields = (name, value) => {
+    
+    setOptionalFields(prev=> {
+      return {
+        ...prev,
+        [name]:{...prev[name], value:value}
+      }
+    })
+  }
+
+  useEffect(()=> {
+    console.log(optionalFields);
+  },[optionalFields])
+  
+  
+  const [optionalfieldElems, setOptionalFieldElems] = useState(Object.entries(optionalFields).map(([key, val]) => {
+    console.log('1235');
+    console.log(val.name);
+    return (
+      <div key= {nanoid} className="select-box-holder">
+           <h5 className="black">{val.name}?</h5>
+           <div className="select-box">
+            {['yes','no','unspecified'].map((fieldValue, index) => {
+              return (<div key = {index} className={ fieldValue == val.value ? "select-item selected-box": "select-item"}>
+               <p>{fieldValue}</p>
+            </div>)
+            })}
+            
+            
+           </div></div>
+    )
+  }));
+
+  useEffect(()=> {
+    
+    setOptionalFieldElems(prev=> {
+    
+      return Object.entries(optionalFields).map(([key, val]) => {
+        return (
+          <div key= {nanoid} className="select-box-holder">
+               <p className="black bold mar-bottom-4">{val.name}?</p>
+               <div className="select-box">
+                {['yes','no','unspecified'].map((fieldValue, index) => {
+                  return (<div onClick = {()=> updateFields(key, fieldValue)} key = {nanoid} className={ fieldValue == val.value ? "select-item selected-box": "select-item"}>
+                   <p>{fieldValue}</p>
+                </div>)
+                })}
+                
+                
+               </div></div>
+        )
+      })
+    })
+  },[optionalFields]);
+  console.log(optionalFields)
   return (
     <Cont colors={COLORS}>
       {loading.state && (
@@ -671,24 +730,25 @@ const Bottombar = ({
       <button
         disabled={adding}
         onClick={startAdding}
-        className="blue-btn-one box-shadow-2 mar-bottom-8 mar-right-8"
+        className="blue-btn-one  mar-bottom-8 mar-right-8"
       >
         <h4>ADD NEW LOCATION</h4>
       </button>
       {adding && (
         <button
           onClick={stopAdding}
-          className="red-btn-one box-shadow-2 flex-inline  align-center"
+          className="red-btn-one  flex-inline  align-center"
         >
           <h4 className="mar-right-8">CANCEL</h4>
-          <FontAwesomeIcon icon={faClose} className="icon-sm red" />
+          <FontAwesomeIcon icon={faClose} className="icon-sm white" />
         </button>
       )}
       <div className="mar-bottom-16"></div>
       <br />
       {adding && (
         <form className=" fake-form opacity-anim" onSubmit={submitForm}>
-          <h4 className="mar-bottom-8">ENTER AN ADDRESS *</h4>
+          <h4 className="mar-bottom-8 text-shadow-red">ENTER AN ADDRESS *</h4>
+          <div className="red-line mar-bottom-8"></div>
           <PlacesAutocomplete
             location={location}
             setLocation={setLocation}
@@ -697,7 +757,8 @@ const Bottombar = ({
 
           <div className="input-line">
             <div className="input-line">
-              <h4>PRODUCT TYPES *</h4>
+              <h4 className = 'text-shadow-red'>PRODUCT TYPES *</h4>
+              <div className="red-line mar-bottom-8"></div>
               <ProductTags
                 tags={tags}
                 selectedTags={selectedTags}
@@ -708,7 +769,8 @@ const Bottombar = ({
           </div>
           <CreateTag addTag={addTag} tags={tags} />
           <div className="input-line">
-            <h4>BUSINESS NAME *</h4>
+            <h4 className = 'text-shadow-red'>BUSINESS NAME *</h4>
+            <div className="red-line mar-bottom-8"></div>
             <input
               {...register("name", {
                 required: true,
@@ -722,8 +784,8 @@ const Bottombar = ({
             )}
           </div>
           <div className="input-line">
-            <h4>DESCRIPTION *</h4>
-
+            <h4 className = 'text-shadow-red'>DESCRIPTION *</h4>
+            <div className="red-line mar-bottom-8"></div>
             <p className="italic">How are their prices?</p>
             <p className="italic mar-bottom-4">What was your experience?</p>
             <textarea
@@ -740,8 +802,8 @@ const Bottombar = ({
           </div>
 
           <div className="input-line">
-            <h4>HOW TO ORDER</h4>
-
+            <h4 className = 'text-shadow-red'>HOW TO ORDER</h4>
+              <div className="red-line"></div>
             <p className="italic">Do you need to order from their website?</p>
             <p className="italic mar-bottom-4">
               Is it pickup only on certain days?
@@ -757,7 +819,8 @@ const Bottombar = ({
           </div>
 
           <div className="input-line">
-            <h4>SPECIFIC PRODUCTS</h4>
+            <h4 className = 'text-shadow-red'>SPECIFIC PRODUCTS</h4>
+            <div className="red-line mar-bottom-8"></div>
             <p className="italic mar-bottom-4">
               Add more specic products to show exactly what they have
             </p>
@@ -866,15 +929,16 @@ const Bottombar = ({
             <div className="mar-bottom-16"></div>
             <div className="blue-btn-one" onClick={addProduct}>
               <div className="flex align-center">
-                <h5 className="mar-right-4">Add</h5>
-                <FontAwesomeIcon icon={faPlus} className="icon-ssm blue" />
+                <h5 className="mar-right-8">Add</h5>
+                <FontAwesomeIcon icon={faPlus} className="icon-ssm white" />
               </div>
             </div>
           </div>
 
           <div className="input-line">
-            <h4>HOURS</h4>
-            <h5>From</h5>
+            <h4 className = 'text-shadow-red'>HOURS</h4>
+            <div className="red-line mar-bottom-8"></div>
+            <h5 className = 'black'>From</h5>
             <input
               {...register("hoursFrom", {
                 required: false,
@@ -883,7 +947,7 @@ const Bottombar = ({
               name="hoursFrom"
               className="mar-bottom-8"
             />
-            <h5>To</h5>
+            <h5 className = 'black'>To</h5>
             <input
               {...register("hoursTo", {
                 required: false,
@@ -894,8 +958,8 @@ const Bottombar = ({
           </div>
 
           <div className="input-line">
-            <h4>PICKUP OR DELIVERY?</h4>
-
+            <h4 className = 'text-shadow-red'>PICKUP OR DELIVERY?</h4>
+            <div className="red-line mar-bottom-8"></div>
             <label htmlFor="pickupAndDelivery">
               <div className="flex align-center">
                 <input
@@ -961,7 +1025,8 @@ const Bottombar = ({
           </div>
 
           <div className="input-line">
-            <h4>WEBSITE LINK</h4>
+            <h4 className ='text-shadow-red'>WEBSITE LINK</h4>
+            <div className="red-line mar-bottom-8"></div>
             <input
               {...register("website", {
                 required: false,
@@ -981,7 +1046,8 @@ const Bottombar = ({
           </div>
 
           <div className="input-line">
-            <h4>CONTACT INFO *</h4>
+            <h4 className ='text-shadow-red'>CONTACT INFO *</h4>
+            <div className="red-line mar-bottom-8"></div>
             <p className="bold">Email</p>
             <input
               {...register("email", {
@@ -1004,14 +1070,13 @@ const Bottombar = ({
           </div>
 
           <div className="input-line">
-            <h4>UPLOAD IMAGE/S</h4>
-
-            <div
-              className="inline-block"
-              onClick={() => imageRef.current.click()}
-            >
-              <ImageUpload />
-            </div>
+            <h4 className = 'text-shadow-red'>UPLOAD IMAGE/S</h4>
+              <div className="red-line mar-bottom-8"></div>
+            
+            <div onClick={() => imageRef.current.click()} className="image-upload-btn">
+                  <h5 className="blue">UPLOAD</h5>
+                  <FontAwesomeIcon icon={faUpload} className="icon-med blue" />
+                </div>
             <input
               ref={imageRef}
               type="file"
@@ -1025,21 +1090,44 @@ const Bottombar = ({
             />
           </div>
 
-          <div className="optional-fields">
-            <div className="title-spec gradient-bg-1">
-              <div className="flex align-center justify-center mar-bottom-8">
-                <h3 className="mar-right-8">OPTIONAL FIELDS</h3>
-                <FontAwesomeIcon icon={faSmileBeam} className="icon-med red" />
-              </div>
-              <h5 className="black light">If you want to be more thorough</h5>
-              <h5 className="black light underline">
-                NONE of these are required!
-              </h5>
-              <h5 className="black light small">
-                Leave unselected if not sure and feel free to only fill out a
-                few
-              </h5>
+          <div className="optional-fields mar-bottom-16">
+
+           <p>Optional</p> 
+           <div className="flex mar-bottom-8 space-between flex-wrap">
+           <h5 className="black">Product Specifications</h5>
+           <p className="underline ">Skip Section</p>
+           </div>
+           <div className="grey-line mar-bottom-16"></div>
+           {optionalfieldElems}
+           </div>
+
+           <div className="optional-fields">
+
+           <p>Optional</p> 
+           <div className="flex mar-bottom-8 space-between flex-wrap">
+           <h5 className="black">Service Rating</h5>
+           <p className="underline ">Skip Section</p>
+           </div>
+           <div className="grey-line mar-bottom-16"></div>
+           <div className="stars ">
+              <StarReview
+                field={reviewFields.pricing.name}
+                stars={reviewFields.pricing.stars}
+                updateStarsFunc={updateReviewFields}
+              />
+              <StarReview
+                field={reviewFields.quality.name}
+                stars={reviewFields.quality.stars}
+                updateStarsFunc={updateReviewFields}
+              />
+              <StarReview
+                field={reviewFields.friendly.name}
+                stars={reviewFields.friendly.stars}
+                updateStarsFunc={updateReviewFields}
+              />
             </div>
+           </div>
+           {/*
             <div className="selects">
               <div className="radio-line">
                 <h4 className="mar-bottom-8">GRASS FED?</h4>
@@ -1376,24 +1464,9 @@ const Bottombar = ({
                 </label>
               </div>
             </div>
-            <div className="stars ">
-              <StarReview
-                field={reviewFields.pricing.name}
-                stars={reviewFields.pricing.stars}
-                updateStarsFunc={updateReviewFields}
-              />
-              <StarReview
-                field={reviewFields.quality.name}
-                stars={reviewFields.quality.stars}
-                updateStarsFunc={updateReviewFields}
-              />
-              <StarReview
-                field={reviewFields.friendly.name}
-                stars={reviewFields.friendly.stars}
-                updateStarsFunc={updateReviewFields}
-              />
-            </div>
-          </div>
+                    */}
+           
+          
           <div className="mar-bottom-32"></div>
           <button
             style={{ display: "flex", width: "100%" }}
