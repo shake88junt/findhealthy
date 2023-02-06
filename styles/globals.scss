@@ -254,9 +254,10 @@ li{
       content:'•';
       margin-right: 4px;
     }
+
   }
   .price{
-    
+    flex-shrink: 0;
     
     padding: 2px 4px;
     display:inline-block;
