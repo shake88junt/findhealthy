@@ -346,6 +346,11 @@ li{
   font-weight:600;
 
 }
+.black-line{
+  height:1px;
+  width:100%;
+  background-color: $redGrey;
+}
 .tag-holder {
   max-height: 300px;
   overflow: auto;

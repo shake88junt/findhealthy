@@ -61,8 +61,13 @@ const Cont = styled.div`
       }
     }
   }
+  .products-holder-2{
+    max-height:800px;
+    overflow-y: auto;
+  }
   .product-item {
-    
+    border-bottom: 1px solid ${props=>props.colors.grey};
+  padding-bottom: 16px;
     margin-bottom: 16px;
     h5 {
       margin-right: 8px;
@@ -86,9 +91,11 @@ const Cont = styled.div`
     }
   }
   .description-text {
-    border-top: 1px solid ${(props) => props.colors.darkRed};
-    border-bottom: 1px solid ${(props) => props.colors.darkRed};
+    border: 1px solid ${(props) => props.colors.grey};
     padding: 8px;
+    max-height:800px;
+    overflow-y: auto;
+    background-color: ${(props) => props.colors.offWhite};
   }
   .section-line {
     border-bottom: 1px solid ${(props) => props.colors.darkGrey};
@@ -121,6 +128,7 @@ const Cont = styled.div`
     border: 1px solid ${(props) => props.colors.darkPink};
     background-color: ${(props) => props.colors.tan};
   }
+ 
   .star-field-holder {
     display: flex;
     flex-direction: column;
@@ -175,7 +183,7 @@ const Sections = ({
         <li key={index} className="product-item">
           <div className=" product-content">
             <h5 className="black mar-right-8">{product.name}</h5>
-            <div className="black-line"></div>
+            
             <p className="price">
               ${product.price} {product.dollarType}/{product.measurement}
             </p>
@@ -246,19 +254,20 @@ const Sections = ({
           <div className="center-inline mar-bottom-16">
             <h4>PRODUCTS</h4>
           </div>
-          <ul>{productElems}</ul>
+          <ul className = 'products-holder-2'>{productElems}</ul>
         </div>
         <div>
           <div className="center-inline mar-bottom-16">
             <h4>DESCRIPTION</h4>
           </div>
-          <div className="description-text">{description}</div>
+          <div className="description-text box-shadow-2">{description}</div>
         </div>
       </section>
       <section className="section">
         <div>
           <div className="section-line">
-            <h5 className="blue">ADDRESS</h5>
+            <h5 className="black mar-bottom-8">ADDRESS</h5>
+            <div className="black-line"></div>
             <p className="bold">{address}</p>
           </div>
 
