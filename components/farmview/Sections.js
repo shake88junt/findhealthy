@@ -267,19 +267,21 @@ const Sections = ({
         <div>
           <div className="section-line">
             <h5 className="black mar-bottom-8">ADDRESS</h5>
-            <div className="black-line"></div>
+            <div className="black-line mar-bottom-4"></div>
             <p className="bold">{address}</p>
           </div>
 
           <div className="section-line">
-            <h5 className="blue">WEBSITE</h5>
+            <h5 className="black mar-bottom-8">WEBSITE</h5>
+            <div className="black-line mar-bottom-4"></div>
             <Link href={website}>
               <p className="bold">{website}</p>
             </Link>
           </div>
 
           <div className="section-line">
-            <h5 className="blue">EMAIL</h5>
+            <h5 className="black mar-bottom-8">EMAIL</h5>
+            <div className="black-line mar-bottom-4"></div>
             <a href={`mailto:${email}`}>
               <p className="bold">{email}</p>
             </a>
