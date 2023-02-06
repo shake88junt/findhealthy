@@ -62,21 +62,27 @@ const Cont = styled.div`
     }
   }
   .product-item {
+    
     margin-bottom: 16px;
     h5 {
       margin-right: 8px;
     }
 
     .product-content {
-      border: 1px solid ${(props) => props.colors.grey};
-      padding: 4px 8px;
-      background-color: ${(props) => props.colors.lightBeige};
+      display:flex;
+    justify-content: space-between;
+      h5::before{
+      content:'•';
+      margin-right: 4px;
+    }
+      
+      
       flex-wrap: wrap;
     }
 
     .price {
       background-color: #fff;
-      border: 1px solid ${(props) => props.colors.grey};
+      
     }
   }
   .description-text {
@@ -167,8 +173,9 @@ const Sections = ({
     products.map((product, index) => {
       return (
         <li key={index} className="product-item">
-          <div className="flex-inline product-content">
+          <div className=" product-content">
             <h5 className="black mar-right-8">{product.name}</h5>
+            <div className="black-line"></div>
             <p className="price">
               ${product.price} {product.dollarType}/{product.measurement}
             </p>
