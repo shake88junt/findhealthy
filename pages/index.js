@@ -7,6 +7,7 @@ import {
   fetchLocation,
   fetchTags,
   createTag,
+  checkEmailUnique
 } from "../utils/supabaseFunctions";
 import supabase from "../utils/supabaseClient";
 import { useEffect, useState } from "react";
