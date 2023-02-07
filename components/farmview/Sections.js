@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import COLORS from "../../data/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faClose, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faClose, faStar, faClock } from "@fortawesome/free-solid-svg-icons";
 
 const Cont = styled.div`
   display: grid;
@@ -98,7 +98,7 @@ const Cont = styled.div`
     background-color: ${(props) => props.colors.offWhite};
   }
   .section-line {
-    border-bottom: 1px solid ${(props) => props.colors.darkGrey};
+    border-bottom: 1px solid ${(props) => props.colors.grey};
     padding-bottom: 8px;
     margin-bottom: 16px;
     word-break: break-word;
@@ -177,6 +177,8 @@ const Sections = ({
   quality,
   friendly,
 }) => {
+  console.log('HOURS');
+  console.log(hoursFrom);
   const [productElems, setProductElems] = useState(
     products.map((product, index) => {
       return (
@@ -267,41 +269,48 @@ const Sections = ({
         <div>
           <div className="section-line">
             <h5 className="black mar-bottom-8">ADDRESS</h5>
-            <div className="black-line mar-bottom-4"></div>
+            <div className="grey-line mar-bottom-4"></div>
             <p className="bold">{address}</p>
           </div>
 
           <div className="section-line">
             <h5 className="black mar-bottom-8">WEBSITE</h5>
-            <div className="black-line mar-bottom-4"></div>
+            <div className="grey-line mar-bottom-4"></div>
             <Link href={website}>
               <p className="bold">{website}</p>
             </Link>
           </div>
-
-          <div className="section-line">
+      {email !== '' && (
+        <div className="section-line">
             <h5 className="black mar-bottom-8">EMAIL</h5>
             <div className="black-line mar-bottom-4"></div>
             <a href={`mailto:${email}`}>
               <p className="bold">{email}</p>
             </a>
           </div>
+      )}
+          
 
           <div className="section-line">
-            <h5 className="blue">PHONE</h5>
+            <h5 className=" black mar-bottom-8">PHONE</h5>
+            <div className="grey-line mar-bottom-4"></div>
             <a href={`tel:${phone}`}>
               <p className="bold">{phone}</p>
             </a>
           </div>
 
           <div className="section-line">
-            <h5 className="blue">DELIVERY</h5>
+            <h5 className=" mar-bottom-8 black">DELIVERY</h5>
+            <div className="grey-line mar-bottom-4"></div>
             <p className="bold">{delivery}</p>
           </div>
         </div>
         <div>
           <div className="center-inline">
-            <h4 className="blue">HOURS</h4>
+            <div className="flex align-center justify-center">
+            <h4 className="blue mar-right-8">HOURS</h4>
+            <FontAwesomeIcon icon = {faClock} className = 'blue icon-sm' />
+            </div>
             <p className="bold inline-block">{hoursFrom}</p>{" "}
             <p className="bold inline-block">{hoursTo}</p>
           </div>
