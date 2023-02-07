@@ -4,13 +4,14 @@ import styled from "styled-components";
 import COLORS from "../../data/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faClose, faStar, faClock } from "@fortawesome/free-solid-svg-icons";
-
+import { getHours } from "../../utils/functions";
 const Cont = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: minmax(300px, 1fr);
   @media only screen and (max-width: 900px) {
-    grid-template-rows: repeat(4, minmax(300px, 1fr));
+    grid-template-rows: repeat(4, auto);
+    align-items: start;
     grid-template-columns: 1fr;
     & > section:nth-of-type(3) {
       background: #fff !important;
@@ -113,6 +114,7 @@ const Cont = styled.div`
   .farm-field-line {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
     max-width: 240px;
   }
@@ -132,7 +134,7 @@ const Cont = styled.div`
   .star-field-holder {
     display: flex;
     flex-direction: column;
-    justify-content: center !important;
+    justify-content: center;
   }
   .star-field {
     display: flex;
@@ -209,7 +211,7 @@ const Sections = ({
       .map((field, index) => {
         return (
           <div key={index} className="farm-field-line">
-            <h5>{field.name}</h5>
+            <h5 className = 'black'>{field.name}</h5>
             <div className="farm-field-icon mar-left-16">
               <FontAwesomeIcon
                 icon={field.value == "true" ? faCheck : faClose}
@@ -230,16 +232,17 @@ const Sections = ({
       { name: "Friendly", value: friendly },
     ].map((field, index) => {
       return (
-        <div key={index} className="star-field">
-          <h4>{field.name}</h4>
+        <div key={index} className="star-holder mar-bottom-16">
+          <h4 className = 'black mar-bottom-4'>{field.name}</h4>
           <div className="star-holder">
             {[1, 2, 3, 4, 5].map((index, realIndex) => {
               return (
                 <FontAwesomeIcon
                   key={realIndex}
                   icon={faStar}
+                  
                   className={
-                    index <= field.value ? "icon-ssm yellow" : "icon-ssm grey"
+                    index <= field.value ? "icon-med yellow" : "icon-med black"
                   }
                 />
               );
@@ -311,8 +314,8 @@ const Sections = ({
             <h4 className="blue mar-right-8">HOURS</h4>
             <FontAwesomeIcon icon = {faClock} className = 'blue icon-sm' />
             </div>
-            <p className="bold inline-block">{hoursFrom}</p>{" "}
-            <p className="bold inline-block">{hoursTo}</p>
+            <p className="bold inline-block">{getHours(hoursFrom)} -</p>{" "}
+            <p className="bold inline-block">{getHours(hoursTo)}</p>
           </div>
         </div>
       </section>
