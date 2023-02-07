@@ -25,7 +25,12 @@ $darkGrey: #533F45;
 $light-blue: #278ffd;
 $light-blue-2: #88c1ff;
 $light-green: #27fd55;
-
+.no-color-link{
+  h1,h2,h3,h4,h5{
+    color:$darkPink;
+  text-decoration-color: inherit !important;
+  }
+}
 .image-upload-btn {
   border-radius: 32px;
   border: 1px solid $grey;

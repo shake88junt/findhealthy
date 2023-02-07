@@ -95,8 +95,8 @@ const Navbar = () => {
   return (
     <Cont colors={COLORS} id="navbar">
       <div className="nav-desktop">
-        <Link href="/">
-          <h5 className="inline-block mar-right-32">FINDHEALTHY</h5>
+        <Link href="/" className = 'no-color-link text-shadow-red'>
+          <h5 className="inline-block mar-right-32 ">FINDHEALTHY</h5>
         </Link>
         {user !== null ? (
           <Link href="/account">
@@ -114,11 +114,17 @@ const Navbar = () => {
 
         <div className="grid-cont">
           <div className="nav-section food-section">
-            <Link href="/">
-              <h4 className=" mar-right-32">FOOD MAP</h4>
+            <Link href="/" className = 'no-color-link text-shadow-red'>
+              <h4 className=" mar-right-32 ">FOOD MAP</h4>
             </Link>
+            <Link href = '/' className = 'no-color-link text-shadow-red'>
             <h5 className="mar-right-16">MAP</h5>
+            </Link>
+            <Link href = '/' className = 'no-color-link text-shadow-red'>
             <h5>FORUM</h5>
+
+            </Link>
+            
           </div>
 
           <div className="nav-section">
