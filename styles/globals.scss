@@ -174,9 +174,16 @@ textarea {
     padding: 4px;
   }
 }
+.bold-hover{
+  cursor:pointer;
+  &:hover{
+    font-weight:600;
+  }
+}
 input[type="text"],
 input[type="email"], input[type='password']{
   border: 1px solid $darkPink;
+  
   background-color: $light-beige;
   font-size: 18px;
   outline: none;

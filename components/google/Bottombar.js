@@ -302,7 +302,8 @@ const Bottombar = ({
       return false;
     }
   };
-
+  const serviceRatingRef = useRef(null);
+  const createButtonRef = useRef(null);
   const clearForm = () => {
     setValue("name", "");
     setValue("description", "");
@@ -1095,18 +1096,19 @@ const Bottombar = ({
            <p>Optional</p> 
            <div className="flex mar-bottom-8 space-between flex-wrap">
            <h5 className="black">Product Specifications</h5>
-           <p className="underline ">Skip Section</p>
+           <p onClick = {()=>serviceRatingRef.current.scrollIntoView({ behavior: "smooth", block: "center" })} className="underline bold-hover ">Skip Section</p>
+           
            </div>
            <div className="grey-line mar-bottom-16"></div>
            {optionalfieldElems}
            </div>
 
-           <div className="optional-fields">
+           <div className="optional-fields" ref = {serviceRatingRef}>
 
            <p>Optional</p> 
            <div className="flex mar-bottom-8 space-between flex-wrap">
-           <h5 className="black">Service Rating</h5>
-           <p className="underline ">Skip Section</p>
+           <h5 className="black" >Service Rating</h5>
+           <p className="underline bold-hover" onClick = {()=>createButtonRef.current.scrollIntoView({ behavior: "smooth", block: "center" })}>Skip Section</p>
            </div>
            <div className="grey-line mar-bottom-16"></div>
            <div className="stars ">
@@ -1473,7 +1475,7 @@ const Bottombar = ({
             type="submit"
             className="align-center justify-center blue-btn-one box-shadow-2 mar-bottom-32"
           >
-            <h3 className="mar-right-8">Create</h3>
+            <h3 className="mar-right-8" ref = {createButtonRef}>Create</h3>
             <FontAwesomeIcon icon={faLocationDot} className="white icon-med" />
           </button>
         </form>

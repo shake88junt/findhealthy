@@ -106,7 +106,7 @@ const Navbar = () => {
           </Link>
         ) : (
           <Link href="/login">
-            <div className="inline-block blue-btn-two">
+            <div className="inline-block black-btn">
               <h5>Login</h5>
             </div>
           </Link>
