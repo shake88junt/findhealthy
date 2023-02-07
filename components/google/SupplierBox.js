@@ -48,6 +48,7 @@ const Cont = styled.div`
     }
   }
   li {
+    display:block;
     margin-bottom: 8px;
   }
   .image-holder {
